@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // bind UI components
     @IBOutlet var principalTextField: UITextField!
     @IBOutlet var timeTextField: UITextField!
     @IBOutlet var roiTextField: UITextField!
@@ -20,14 +21,17 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    //onclick of caclulate button
     @IBAction func onCalculateClicked(_ sender: UIButton){
         calculatreInterest()
     }
     
+    //onclick of clear button
     @IBAction func onClearClicked(_ sender: UIButton){
         clearFields()
     }
     
+    //clear all text fields and set default values to label
     func clearFields(){
         principalTextField.text = "";
         timeTextField.text = "";
@@ -36,6 +40,7 @@ class ViewController: UIViewController {
         totalAmountText.text = "0"
     }
     
+    //check textfield values and calculate simple interest
     func calculatreInterest(){
         if((principalTextField.text ?? "").isEmpty || (roiTextField.text ?? "").isEmpty || (timeTextField.text ?? "").isEmpty){
             return
