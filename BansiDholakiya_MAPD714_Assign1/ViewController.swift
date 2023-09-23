@@ -40,14 +40,12 @@ class ViewController: UIViewController {
         totalAmountText.text = "0"
     }
     
-    //check textfield values and calculate simple interest
+    //calculate simple interest
     func calculatreInterest(){
-        if((principalTextField.text ?? "").isEmpty || (roiTextField.text ?? "").isEmpty || (timeTextField.text ?? "").isEmpty){
-            return
-        }else{
-            let P = Int(principalTextField.text!) ?? 0
-            let R = Int(roiTextField.text!) ?? 0
-            let T = Int(timeTextField.text!) ?? 0
+        if(isValidInput()){
+            let P = Double(principalTextField.text!) ?? 0.0
+            let R = Double(roiTextField.text!) ?? 0.0
+            let T = Double(timeTextField.text!) ?? 0.0
             let SI = (P * R * T)/100
             
             interestText.text = SI.description
@@ -55,7 +53,52 @@ class ViewController: UIViewController {
         }
         
     }
-
+    
+    //check inputs are valid or not
+    func isValidInput() -> Bool{
+        if((principalTextField.text ?? "").isEmpty || (roiTextField.text ?? "").isEmpty || (timeTextField.text ?? "").isEmpty){
+            displayAlert(message: "Please enter required input")
+            return false
+        }else if(!principalTextField.text!.isDouble()){
+            displayAlert(message: "Please enter valid principal")
+            return false
+        }else if(!timeTextField.text!.isDouble()){
+            displayAlert(message: "Please enter valid time period")
+            return false
+        }else if(!roiTextField.text!.isDouble()){
+            displayAlert(message: "Please enter valid rate of interest")
+            return false
+        }
+        return true;
+    }
+    
+    //display alert message
+    func displayAlert(message: String){
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .cancel))
+        present(alert, animated: true)
+    }
 
 }
 
+
+extension String {
+
+    func isInt() -> Bool {
+
+        if let intValue = Int(self) {
+            return true
+        }
+
+        return false
+    }
+
+    func isDouble() -> Bool {
+
+        if let doubleValue = Double(self) {
+            return true
+        }
+
+        return false
+    }
+}
