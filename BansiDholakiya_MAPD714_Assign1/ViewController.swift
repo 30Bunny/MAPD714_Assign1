@@ -1,9 +1,12 @@
 //
 //  ViewController.swift
 //  BansiDholakiya_MAPD714_Assign1
+// Student ID: 301363508
 //
 //  Created by Bansi Dholakiya on 2023-09-21.
 //
+// App Description : This is a app for calculating simple interest
+// Version : 1.0.0
 
 import UIKit
 
