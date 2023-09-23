@@ -15,10 +15,41 @@ class ViewController: UIViewController {
     @IBOutlet var roiTextField: UITextField!
     @IBOutlet var interestText: UILabel!
     @IBOutlet var totalAmountText: UILabel!
+    @IBOutlet var textFieldView: UIView!
+    @IBOutlet var resultView: UIView!
+    @IBOutlet var roundView: UIView!
+    @IBOutlet var lineView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        styleCard(view: resultView)
+        styleCard(view: textFieldView)
+        styleRoundCard(view: roundView)
+        styleSeprator(view: lineView)
+    }
+    
+    //style rectangular cards
+    func styleCard(view: UIView){
+        view.layer.cornerRadius = 8
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        view.layer.shadowRadius = 8.0
+        view.layer.shadowOpacity = 0.5
+    }
+    
+    //style circle shap cards
+    func styleRoundCard(view: UIView){
+        view.layer.cornerRadius = view.frame.width / 2
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowRadius = 4.0
+        view.layer.shadowColor = UIColor.lightGray.cgColor
+        view.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+    }
+    
+    //style seprator view
+    func styleSeprator(view: UIView){
+        view.frame.size.height = 1
     }
     
     //onclick of caclulate button
@@ -36,8 +67,8 @@ class ViewController: UIViewController {
         principalTextField.text = "";
         timeTextField.text = "";
         roiTextField.text = "";
-        interestText.text = "0"
-        totalAmountText.text = "0"
+        interestText.text = "$ 0"
+        totalAmountText.text = "$ 0"
     }
     
     //calculate simple interest
@@ -47,11 +78,11 @@ class ViewController: UIViewController {
             let R = Double(roiTextField.text!) ?? 0.0
             let T = Double(timeTextField.text!) ?? 0.0
             let SI = (P * R * T)/100
-            
-            interestText.text = SI.description
-            totalAmountText.text = (SI + P).description
+
+            interestText.text = "$ \(SI.description)"
+            totalAmountText.text = "$ \((SI + P).description)"
         }
-        
+
     }
     
     //check inputs are valid or not
@@ -83,19 +114,9 @@ class ViewController: UIViewController {
 
 
 extension String {
-
-    func isInt() -> Bool {
-
-        if let intValue = Int(self) {
-            return true
-        }
-
-        return false
-    }
-
     func isDouble() -> Bool {
 
-        if let doubleValue = Double(self) {
+        if Double(self) != nil {
             return true
         }
 
